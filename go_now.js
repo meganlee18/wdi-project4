@@ -1,57 +1,79 @@
-
-var citiesBtn = document.querySelector(".cities-btn")
-var foodBtn = document.querySelector(".food-btn")
-var beachesBtn = document.querySelector(".beaches-btn")
-var musuemsBtn = document.querySelector(".museums-btn")
-var resultList = document.getElementById("result-list")
-var searchResults = document.getElementById("search-results")
+var $citiesBtn = $('.cities-btn')
+var $foodBtn = $('.food-btn')
+var $beachesBtn = $('.beaches-btn')
+var $musuemsBtn = $('.museums-btn')
+var $searchResultsDiv = $('#search-results-div')
 
 
-citiesBtn.addEventListener("click", function () {
+var fetchData = function() {
+
+}
+
+
+
+
+$citiesBtn.on("click", function(event){
   event.preventDefault();
-  searchResults.innerHTML = "Searching..."
-  console.log("Cities Button is clicked")
-
+   $searchResultsDiv.html("Searching...")
+   console.log("Cities Button is clicked")
 
   var options = {
-    url: 'https://www.triposo.com/api/20180507/location.json?tag_labels=city&account=C995KGMT&token=w1iffxcmvhlgj9y76d6ass468nxzt07l'
+    url: 'https://www.triposo.com/api/20180507/location.json',
+    data: {
+      tag_labels: 'city',
+      account: 'C995KGMT',
+      token: 'w1iffxcmvhlgj9y76d6ass468nxzt07l'
+    }
   }
 
   $.ajax(options).done(function (res) {
+    $searchResultsDiv.html("Choose a city!")
     res.results.forEach(function (array) {
-      searchResults.innerHTML = "Choose a city!"
       console.log(array.name)
 
-      var newListItem = document.createElement('li');
-      newListItem.textContent = array.name
-      resultList.appendChild(newListItem);
+      var $p = $('<p>')
+      var $a = $('<a>')
+      .attr('href', 'about.html')
+      .text(array.name)
+
+      $p.append($a);
+      $searchResultsDiv.append($p);
     })
   })
 })
 
 
-
-foodBtn.addEventListener("click", function () {
+$foodBtn.on("click", function(event){
   event.preventDefault();
 
-  //resultList.empty();
+  $searchResultsDiv.empty();
 
-  searchResults.innerHTML = "Searching..."
+  $searchResultsDiv.html("Searching...") 
   console.log("Food Button is clicked")
 
-
   var options = {
-    url: 'https://www.triposo.com/api/20180507/tag.json?label=eatingout&count=7&offset=24&account=C995KGMT&token=w1iffxcmvhlgj9y76d6ass468nxzt07l'
+    url: 'https://www.triposo.com/api/20180507/tag.json',
+    data: {
+      label: 'eatingout',
+      count: '7',
+      offset:'24',
+      account: 'C995KGMT',
+      token: 'w1iffxcmvhlgj9y76d6ass468nxzt07l'
+    }
   }
 
   $.ajax(options).done(function (res) {
+    $searchResultsDiv.html("Choose a city!")
     res.results.forEach(function (array) {
-      searchResults.innerHTML = "Choose a city!"
       console.log(array.location_id)
 
-      var newListItem = document.createElement('li');
-      newListItem.textContent = array.location_id
-      resultList.appendChild(newListItem);
+      var $p = $('<p>')
+      var $a = $('<a>')
+      .attr('href', 'about.html')
+      .text(array.location_id)
+
+      $p.append($a);
+      $searchResultsDiv.append($p);
     })
   })
 })
