@@ -4,19 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Go-Now!</title>
   <link href="https://fonts.googleapis.com/css?family=Coustard" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-  <h1>So you are interested in ____ </h1>
+  <h1>So you are interested in</h1> 
+  <div id="cityName">
+
+  </div>
   <h3>When are you thinking of going?</h3>
   
+  <p>Select a date</p>
   <input 
   type="date" 
   id="myDate"/>
-  <p>Values to be returned here</p>
 
+  <button id="city-details">Go!</button>
+
+  <div class="text-container">
+    <h3 id="about-country"></h3>
+    <h3 id="weather"></h3>
+    <h3 id="currency"></h3>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <script src="returnValue.js"></script>
 </body>
 </html>
