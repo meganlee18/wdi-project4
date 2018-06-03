@@ -17,7 +17,7 @@ var fetchData = function () {
     url: 'https://www.triposo.com/api/20180507/location.json',
     data: {
       tag_labels: 'city',
-      count:'7',
+      count:'10',
       account: 'C995KGMT',
       token: 'w1iffxcmvhlgj9y76d6ass468nxzt07l'
     }
@@ -59,7 +59,7 @@ $foodBtn.on("click", function(event){
     url: 'https://www.triposo.com/api/20180507/tag.json',
     data: {
       label: 'eatingout',
-      count: '7',
+      count: '10',
       offset:'24',
       account: 'C995KGMT',
       token: 'w1iffxcmvhlgj9y76d6ass468nxzt07l'
@@ -99,7 +99,7 @@ $beachesBtn.on("click", function(event){
     data: {
       child_tag_labels:'diving',
       diving_score:'>5',
-      count: '7',
+      count: '10',
       offset:'20',
       account: 'C995KGMT',
       token: 'w1iffxcmvhlgj9y76d6ass468nxzt07l'
@@ -136,7 +136,7 @@ $museumsBtn.on("click", function(event){
     url: 'https://www.triposo.com/api/20180507/tag.json',
     data: {
       label: 'museums',
-      count: '7',
+      count: '10',
       offset:'16',
       account: 'C995KGMT',
       token: 'w1iffxcmvhlgj9y76d6ass468nxzt07l'
