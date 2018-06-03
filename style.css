@@ -71,3 +71,7 @@ li {
 .text-container {
   margin-top: 50px;
 }
+
+.link a {
+  display: inline-block;
+}
