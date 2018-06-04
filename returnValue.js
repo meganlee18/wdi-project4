@@ -1,3 +1,4 @@
+var api_domain = 'http://localhost:5000/'
 var $cityName = $('#cityName')
 var $textContainer = $('text-container')
 var $cityDetails = $('#city-details')
@@ -13,7 +14,6 @@ console.log(search)
 //convert to json object
 var urlQueryParams = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
 console.log(urlQueryParams)
-//var cityName = urlQueryParams.city
 
 //select the city within the object
 $cityName.append(urlQueryParams.city)
@@ -30,7 +30,7 @@ var fetchCountryIdDoneHandler = function (res) {
 
     var $p = $('<p>')
 
-    $p.append('<img src=' + array.images[0].sizes.medium.url + '>');
+    $p.append('<img src=' + array.images[0].sizes.medium.url + '><br/>');
     $aboutCountry.append($p);
     $textContainer.append($aboutCountry);
     $aboutCountry.text('About the city')
@@ -46,7 +46,7 @@ var fetchCurrencyAjaxCall = function (data) {
   var country = data.results[0].country_id.toLowerCase()
   // .then() returns a new promise
   return $.ajax({
-    url: 'https://restcountries.eu/rest/v2/name/' + country,
+    url: 'https://restcountries.eu/rest/v2/name/' + country.split('_').join(' '),
   })
 }
 
@@ -89,7 +89,6 @@ var encodedCity = function (cityName) {
 $cityDetails.on("click", function (event) {
 
   var fetchCountryId = $.ajax({
-
     url: 'https://www.triposo.com/api/20180507/location.json',
     data: {
       id: encodedCity(urlQueryParams.city),
@@ -126,42 +125,39 @@ $cityDetails.on("click", function (event) {
 
   var fetchWeather = fetchGeoLocation
     .then(function(data) {
-        return $.ajax({
-          url: 'https://api.darksky.net/forecast/SECRETKEY/'
-          + data.results[0].geometry.location.lat + ',' 
-          + data.results[0].geometry.location.lng + ','
-          + date
-          }
-        );
+      let location = data.results[0].geometry.location
+      return $.ajax({
+        url: api_domain + 'cityinfo',
+        data: {
+          lat: location.lat,
+          lng: location.lng,
+          date: date
+        },
+        dataType: 'json'
+      })
     })
     .done(function(res) {
-      //temperature returns in Farenheit
       console.log(res.currently.temperature)
       console.log(res.currently.summary)
       $weather.text('Weather in the month of ' + (myDate.value.split("-")[1]))
+      
+      var convertToCelsius = function(farenheit){
+        var value = parseFloat(farenheit)
+        return (value-32)/1.8;
+      }
+      
+      var tempInCelsius = Math.round(convertToCelsius(res.currently.temperature))
+      var citySummary = (res.currently.summary).toLowerCase()
+      
+      var $p3 = $('<p>')
 
-      //Need to convert to degrees celsius
-      //Append to the body
+      $p3.append('Weather will be ' + citySummary + '. The temperature will be ' + tempInCelsius + '&deg;' + 'C.');
 
-      var $p3 = $('p')
-
-      $p3.append(res.currently.temperature);
       $weather.append($p3);
       $textContainer.append($weather);
     });
 
 });
-
-
-
-  //1. Fetch Google Geolocation data, pass in city name
-  //   https://maps.googleapis.com/maps/api/geocode/json?address='+ urlQueryParams.city + '&key=AIzaSyAiZ2zRbNnifbohJdLUd_JsmSlkFxEKk8c
-  //2. Return lat and long details
-  //3. Fetch DarkSky weather api, pass in lat and long, and timestamp (from input field)
-  //   https://api.darksky.net/forecast/[key]/[latitude],[longitude],[time]
-  //4. Return weather
-
-
 
 
 

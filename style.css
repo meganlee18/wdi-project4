@@ -3,11 +3,30 @@ body {
   font-family: 'Coustard', serif;
   color: white;
   margin: 0 auto;
-  width: 50%;
   padding: 20px;
+  width: 80%;
 }
 
-.start-btn{
+.search-results-div {
+  color: sandybrown;
+  font-size: 20px;
+}
+
+p {
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  img {
+    width: 80%;
+  }
+}
+
+.cities-btn:hover, .food-btn:hover, .beaches-btn:hover, .museums-btn:hover {
+  background-color: green;
+}
+
+.start-btn {
   font-size:30px;
   border: 2px solid white;
   background-color: sandybrown;
@@ -15,6 +34,11 @@ body {
   padding: 10px; 
   text-align: center;
   margin-left: 100px;
+}
+
+.start-btn:hover {
+  background: salmon;
+  margin-top: 2px;
 }
 
 a {
@@ -26,13 +50,20 @@ a {
 .cities-btn, .food-btn, .beaches-btn, .museums-btn {
   color: white;
   padding: 10px;
-  margin: 5px;
+  margin: 20px;
   font-size: 20px;
   background-color: sandybrown;
   border-radius: 50px;
   border: solid white 2px;
-  width: 20%;
+  display: block;
+  width: 50%;
+
 }
+
+.cities-btn:hover, .food-btn:hover, .beaches-btn:hover, .museums-btn:hover {
+  background-color: salmon;
+}
+
 
 li {
   list-style-type: none;
@@ -47,6 +78,9 @@ li {
 
 #myDate {
   display: inline;
+  font-size: 18px;
+  border: 2px solid black;
+  font-family: 'Coustard', serif;
 }
 
 .question {

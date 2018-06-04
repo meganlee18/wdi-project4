@@ -3,33 +3,34 @@ var $citiesBtn = $('.cities-btn')
 var $foodBtn = $('.food-btn')
 var $beachesBtn = $('.beaches-btn')
 var $museumsBtn = $('.museums-btn')
-var $searchResultsDiv = $('#search-results-div')
+var $searchResultsDiv = $('.search-results-div')
 
 
-var fetchData = function () {
+$citiesBtn.on("click", function(event) {
 
   event.preventDefault();
   $searchResultsDiv.empty();
 
+  $('.buttons').hide()
   $searchResultsDiv.html("Searching...")
   console.log("Cities Button is clicked")
+  $('#whereToGo').text("I want to go somewhere with cities")
 
   var options = {
-    options = {
-      url: api_domain + 'triposo',
-      data: {
-        req_type: 'cities'
-      }
+    url: api_domain + 'triposo',
+    data: {
+      req_type: 'cities'
     }
   }
 
   $.ajax(options).done(function (res) {
-    $searchResultsDiv.html("Choose a city!")
+    res = JSON.parse(res)
+    $searchResultsDiv.html("Choose a city")
     res.results.forEach(function (array) {
       console.log(array.name)
 
       var $p = $('<p>')
-      var $a = $('<a>')
+      var $a = $('<a style= "font-size: 20px;">')
         //passing querystrings in params
         .attr('href', 'about.html?city=' + array.name)
         .text(array.name)
@@ -38,11 +39,6 @@ var fetchData = function () {
       $searchResultsDiv.append($p);
     })
   })
-}
-
-
-$citiesBtn.on("click", function(event) {
-  fetchData();
 })
 
 
@@ -51,21 +47,20 @@ $foodBtn.on("click", function(event){
 
   $searchResultsDiv.empty();
 
+  $('.buttons').hide()
   $searchResultsDiv.html("Searching...") 
   console.log("Food Button is clicked")
+  $('#whereToGo').text("I want to go somewhere with food")
 
   var options = {
-    url: 'https://www.triposo.com/api/20180507/tag.json',
+    url: api_domain + 'triposo',
     data: {
-      label: 'eatingout',
-      count: '10',
-      offset:'24',
-      account: 'C995KGMT',
-      token: 'w1iffxcmvhlgj9y76d6ass468nxzt07l'
+      req_type: 'food'
     }
   }
 
   $.ajax(options).done(function (res) {
+   res = JSON.parse(res)
     $searchResultsDiv.html("Choose a city!")
     res.results.forEach(function (array) {
       console.log(array.location_id)
@@ -79,9 +74,7 @@ $foodBtn.on("click", function(event){
       $searchResultsDiv.append($p);
     })
   })
-})
-
-
+ })
 
 
 $beachesBtn.on("click", function(event){
@@ -89,23 +82,20 @@ $beachesBtn.on("click", function(event){
 
   $searchResultsDiv.empty();
 
+  $('.buttons').hide()
   $searchResultsDiv.html("Searching...") 
   console.log("Beaches Button is clicked")
+  $('#whereToGo').text("I want to go somewhere with beaches")
 
   var options = {
-    url: 'https://www.triposo.com/api/20180507/location.json',
-
+    url: api_domain + 'triposo',
     data: {
-      child_tag_labels:'diving',
-      diving_score:'>5',
-      count: '10',
-      offset:'20',
-      account: 'C995KGMT',
-      token: 'w1iffxcmvhlgj9y76d6ass468nxzt07l'
+      req_type: 'beaches'
     }
   }
 
   $.ajax(options).done(function (res) {
+    res = JSON.parse(res)
     $searchResultsDiv.html("Choose a city!")
     res.results.forEach(function (array) {
       console.log(array.name)
@@ -121,28 +111,25 @@ $beachesBtn.on("click", function(event){
   })
 })
 
-
-
 $museumsBtn.on("click", function(event){
   event.preventDefault();
 
   $searchResultsDiv.empty();
 
+  $('.buttons').hide()
   $searchResultsDiv.html("Searching...") 
   console.log("Musuems Button is clicked")
+  $('#whereToGo').text("I want to go somewhere with museums")
 
   var options = {
-    url: 'https://www.triposo.com/api/20180507/tag.json',
+    url: api_domain + 'triposo',
     data: {
-      label: 'museums',
-      count: '10',
-      offset:'16',
-      account: 'C995KGMT',
-      token: 'w1iffxcmvhlgj9y76d6ass468nxzt07l'
+      req_type: 'museums'
     }
   }
 
   $.ajax(options).done(function (res) {
+    res = JSON.parse(res)
     $searchResultsDiv.html("Choose a city!")
     res.results.forEach(function (array) {
       console.log(array.location_id)
