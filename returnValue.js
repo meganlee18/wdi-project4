@@ -147,7 +147,6 @@ $cityDetails.on("click", function (event) {
 
       $p3.append(res.currently.temperature);
       $weather.append($p3);
-      debugger;
       $textContainer.append($weather);
     });
 

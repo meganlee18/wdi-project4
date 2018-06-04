@@ -1,3 +1,4 @@
+var api_domain = 'http://localhost:5000/'
 var $citiesBtn = $('.cities-btn')
 var $foodBtn = $('.food-btn')
 var $beachesBtn = $('.beaches-btn')
@@ -14,12 +15,11 @@ var fetchData = function () {
   console.log("Cities Button is clicked")
 
   var options = {
-    url: 'https://www.triposo.com/api/20180507/location.json',
-    data: {
-      tag_labels: 'city',
-      count:'10',
-      account: 'C995KGMT',
-      token: 'w1iffxcmvhlgj9y76d6ass468nxzt07l'
+    options = {
+      url: api_domain + 'triposo',
+      data: {
+        req_type: 'cities'
+      }
     }
   }
 
@@ -44,7 +44,6 @@ var fetchData = function () {
 $citiesBtn.on("click", function(event) {
   fetchData();
 })
-
 
 
 $foodBtn.on("click", function(event){
