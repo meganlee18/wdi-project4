@@ -1,4 +1,4 @@
-var api_domain = 'http://localhost:5000/'
+var api_domain = 'https://boiling-ocean-62172.herokuapp.com/'
 var $citiesBtn = $('.cities-btn')
 var $foodBtn = $('.food-btn')
 var $beachesBtn = $('.beaches-btn')

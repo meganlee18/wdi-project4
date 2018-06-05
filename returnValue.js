@@ -1,4 +1,4 @@
-var api_domain = 'http://localhost:5000/'
+var api_domain = 'https://boiling-ocean-62172.herokuapp.com/'
 var $cityName = $('#cityName')
 var $textContainer = $('text-container')
 var $cityDetails = $('#city-details')
@@ -119,12 +119,12 @@ $cityDetails.on("click", function (event) {
       console.log(array.geometry.location.lng)
     })
   });
-  
+
   //converting input time to UNIX
   var date = new Date(myDate.value).getTime() / 1000
 
   var fetchWeather = fetchGeoLocation
-    .then(function(data) {
+    .then(function (data) {
       let location = data.results[0].geometry.location
       return $.ajax({
         url: api_domain + 'cityinfo',
@@ -136,19 +136,19 @@ $cityDetails.on("click", function (event) {
         dataType: 'json'
       })
     })
-    .done(function(res) {
+    .done(function (res) {
       console.log(res.currently.temperature)
       console.log(res.currently.summary)
       $weather.text('Weather in the month of ' + (myDate.value.split("-")[1]))
-      
-      var convertToCelsius = function(farenheit){
+
+      var convertToCelsius = function (farenheit) {
         var value = parseFloat(farenheit)
-        return (value-32)/1.8;
+        return (value - 32) / 1.8;
       }
-      
+
       var tempInCelsius = Math.round(convertToCelsius(res.currently.temperature))
       var citySummary = (res.currently.summary).toLowerCase()
-      
+
       var $p3 = $('<p>')
 
       $p3.append('Weather will be ' + citySummary + '. The temperature will be ' + tempInCelsius + '&deg;' + 'C.');

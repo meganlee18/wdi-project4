@@ -1,5 +1,5 @@
 # Travel Kit
-Visit my website here: -URL to be provided after deployment-
+Visit my website here: https://meganlee18.github.io/wdi-project4/
 
 ## Usage Instructions
 This is a travel kit web app with a mobile first design. It aims to provide users travel destinations quickly based on landmark popularity. The web app returns information such as city of interest, currency exchange rates for the period of time they wish to travel, and weather records based on historical data. Information is sourced from external APIs.
