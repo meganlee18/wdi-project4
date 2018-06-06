@@ -139,7 +139,7 @@ $cityDetails.on("click", function (event) {
     .done(function (res) {
       console.log(res.currently.temperature)
       console.log(res.currently.summary)
-      $weather.text('Weather in the month of ' + (myDate.value.split("-")[1]))
+      $weather.text('Estimated weather* in the month of ' + (myDate.value.split("-")[1]) + ': ')
 
       var convertToCelsius = function (farenheit) {
         var value = parseFloat(farenheit)
